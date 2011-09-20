@@ -1,0 +1,27 @@
+window.chooseWinner = ->
+  attendees = [
+    "Greg"
+    "Guy"
+    "Matt"
+    "Neal"
+    "Jason"
+    "Tony"
+    "Isaac"
+    "Chris"
+    "Simon"
+    "Jeff"
+  ]
+
+  pickNumber = (max) ->
+    Math.floor(Math.random() * max)
+
+  winner = ->
+    # If at first you don't succeed, cheat!
+    id = pickNumber(attendees.length * 2) 
+
+    person = if id >= attendees.length
+      "Greg"
+    else
+      attendees[id]
+
+  "#{winner()} wins a bag of full strength Sumatra coffee beans!" 

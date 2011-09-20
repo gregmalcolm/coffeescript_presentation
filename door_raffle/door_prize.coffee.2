@@ -1,0 +1,20 @@
+window.chooseWinner = ->
+  attendees = [
+    "Greg"
+    "Guy"
+    "Matt"
+    "Neal"
+    "Jason"
+    "Tony"
+    "Isaac"
+    "Chris"
+    "Simon"
+    "Jeff"
+  ]
+
+  pickNumber = (max) ->
+    Math.floor(Math.random() * max)
+
+  winner_id = pickNumber(attendees.length)
+
+  "#{attendees[winner_id]} wins a bag of full strength Sumatra coffee beans!" 

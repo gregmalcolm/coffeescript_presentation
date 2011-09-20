@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<!-- HTML borrowed from Coffeescript website
+http://coffeescript.org
+
+I needed a good REPL for a presentation, and having somewhere to stash code
+samples was just a bonus! - Greg
+-->
+
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Introduction to CoffeeScript</title>
+  <link rel="stylesheet" type="text/css" href="coffeescript_demo_files/docs.css">
+  <link rel="stylesheet" type="text/css" href="coffeescript_demo_files/idle.css">
+  <link rel="shortcut icon" href="http://jashkenas.github.com/coffee-script/documentation/images/favicon.ico">
+</head>
+<body>
+
+  <div id="fadeout"></div>
+
+  <div id="flybar">
+    <p id="logo" href="#top" style="color: #060">[cbusjs]: Intro to CoffeeScript</p>
+    <div class="navigation try active">
+      <div class="button">
+        Demo
+        <div class="repl_bridge"></div>
+      </div>
+      <div class="contents repl_wrapper">
+        <div class="code">
+          <div class="screenshadow tl"></div>
+          <div class="screenshadow tr"></div>
+          <div class="screenshadow bl"></div>
+          <div class="screenshadow br"></div>
+          <div id="repl_source_wrap">
+            <textarea id="repl_source" rows="100" spellcheck="false"></textarea>
+          </div>
+          <div id="repl_results_wrap"><pre id="repl_results"></pre></div>
+          <div class="minibutton dark run" title="Ctrl-Enter">Run</div>
+          <br class="clear">
+        </div>
+      </div>
+    </div>
+    <div class="navigation credit">
+      <div class="button">
+        <a href=http:/coffeescript.org>Apologies to http://coffeescript.org!</a>
+        <div class="repl_bridge"></div>
+      </div>
+    </div>
+    <div id="error" style="display:none;"></div>
+  </div>
+  <div class="container scraps">
+    <span class="bookmark" id="top"></span>
+
+
+
+
+
+
+
+
+    <h1>Intro demo</h1>
+    <div><pre>
+window.chooseWinner = ->
+  attendees = [
+    "Greg"
+    "Guy"
+    "Matt"
+    "Neal"
+    "Jason"
+    "Tony"
+    "Isaac"
+    "Chris"
+    "Simon"
+    "Jeff"
+  ]
+
+  winner_id = Math.floor(Math.random() * attendees.length)
+
+  "#{attendees[winner_id]} wins a bag of full strength Sumatra coffee beans!"
+    </pre></div>
+    <div><pre>
+window.chooseWinner = ->
+  attendees = [
+    "Greg"
+    "Guy"
+    "Matt"
+    "Neal"
+    "Jason"
+    "Tony"
+    "Isaac"
+    "Chris"
+    "Simon"
+    "Jeff"
+  ]
+
+  pickNumber = (max) ->
+    Math.floor(Math.random() * max)
+
+  winner = ->
+    # If at first you don't succeed, cheat!
+    id = pickNumber(attendees.length * 2) 
+
+    person = if id >= attendees.length
+      "Greg"
+    else
+      attendees[id]
+
+  "#{winner()} wins a bag of full strength Sumatra coffee beans!"
+    
+    </pre><div>
+    
+    <h1>Functions</h1>
+    <div><pre>
+# Anonymous
+-> 1+2
+do -> 1 + 2
+(-> 1+2)()
+
+# To var
+fn = -> 1 + 2
+fn =(a,b) -> 
+  a + b
+fn =(a = 1, b = 2) -> 
+  a + b
+
+# return
+    </pre></div>
+
+
+    <h1>Operators</h1>
+
+    <div><pre>
+# is == isnt !=
+
+bogata = "a coffee"
+earlGrey = "a tea"
+alert bogata == "a coffee"
+
+# && || and or 
+# not !
+
+# @, this
+
+winner = yes if pick in [47, 92, 13]
+    </pre></div>
+
+    <h1>Existence</h1>
+
+    <div><pre>
+gingerbreadLatte = "In stock"
+#gingerbreadLatte ?= "And nummy"
+
+status = gingerbreadLatte
+#status = gingerbreadLatte ? "Out of season"
+alert status
+    </pre></div>
+    <div><pre>
+lots =
+  of_tree:
+    nodes:       "numerous"
+    to_traverse: "many"
+
+nodes1 = lots.of_tree.nodes
+nodes2 = lots?.of_tree?.to_traverse
+
+alert nodes2   
+    </pre></div>
+
+    <h1>Strings, heredocs and heregexes</h1>
+    <div><pre>
+# “#{a}” “” “”” ‘’’’ ### ### 
+
+operator = /// ^ (
+  ?: [-=]>             # function
+   | [-+*/%<>&|^!?=]=  # compound assign / compare
+   | >>>=?             # zero-fill right shift
+   | ([-+:])\1         # doubles
+   | ([&|<>])\2=?      # logic / shift
+   | \?\.              # soak access
+   | \.{2,3}           # range or splat
+) ///
+    </pre></div>
+
+    
+
+    <h1>Assignment</h1>
+    <div><pre>
+k = "Kona"
+s = "Sumatra"
+
+[s,k] = [k,s]
+alert(k)
+
+a = b = c = "Spam"
+[a, b] = do -> ["French", "Italian"]
+alert "#{a} roast, #{b} roast and #{c} roast"
+
+bread = 0
+cake = 5 
+pie = 10
+alert bread < cake < pie
+    </pre></div>
+
+    <h1>Conditionals</h1>
+    <div><pre>
+#if/unless
+
+strength = 6
+roast = if strength > 5
+  "dark"
+else
+  "light"
+alert roast
+    </pre></div>
+    <div><pre>
+# while
+
+additives = []
+spoons = 5
+
+addSugar = ->
+  spoons = spoons - 1
+  additives = additives.concat('Sugar')
+
+addSugar() while spoons >= 0
+
+alert additives
+    </pre></div>
+
+    <div><pre>
+#select case
+choice = 4
+blend = switch choice
+           when 0 then "Zambia"
+           when 1 then "Kenya"
+           when 2 then "Somolian"
+           else "No Frillz Coffeez"
+alert blend
+    </pre></div>
+
+    <h1>Splats</h1>
+    
+    <div><pre>
+espressos = [
+  "Americano"
+  "Cappuccino"
+  "Frappuccino"
+  "Mocha"]
+
+rankings = (first, others..., last) ->
+  """
+  #{first} is most popular.
+  #{last} is the least popular. 
+  Other espressos include #{others}.
+  """
+
+alert rankings(espressos...)  
+    </pre></div>
+
+    <h1>Comprehensions</h1>
+    
+    <div><pre>
+#of - iterate through keys. Equivalent to ‘in’ in javascript
+
+coffeeStocks = costaRico: 53, darkRoast: 9, columbia: 0
+
+report = for blend, qty of coffeeStocks
+  "#{qty} packets of #{blend}"
+alert report
+    </pre></div>
+
+    <div><pre>
+#in - arrays
+alert enhancer for enhancer in ['sugar', 'creamer', 'scotch']
+alert waitForDrink = (num for num in [10..1])
+    </pre></div>   
+
+    <h1>Function Binding</h1>
+
+    <div><pre>
+customer =
+  name: 'Greg'
+  purchase: (coffee) ->
+    alert "#{@name} ordered a #{coffee.name}"
+
+coffee =
+  name: "Mocha"
+
+Order = (customer, coffee) ->
+  @customer = customer
+  @coffee = coffee
+
+  $('#repl_results').bind 'click', (event) =>
+    @customer.purchase @coffee
+
+order = new Order(customer, coffee)
+    </pre></div>    
+
+    <h1>Classes</h1>
+    
+    <div><pre>
+class Shop
+  constructor: (product) ->
+    @product = product
+
+  buy: (item, amount = 1) ->
+    alert("#{@product} shop - #{amount} #{item}(s) coming up!")
+
+myShop = new Shop("Kilts")
+myShop.buy "Malcolm Tartan", 3
+
+class CoffeeShop extends Shop
+  constructor: ->
+    super "coffee"
+
+coffeeShop = new CoffeeShop
+coffeeShop.buy "Latte"
+    </pre></div>
+
+    <h1>Try Catch Finally</h1>
+    <div><pre>
+# Same as javascript, but less parens!
+    </pre></div>    
+
+  </div>
+
+
+
+
+  <script type="text/coffeescript">
+
+    # Set up the compilation function, to run when you stop typing.
+    compileSource = ->
+      source = $('#repl_source').val()
+      window.compiledJS = ''
+      try
+        window.compiledJS = CoffeeScript.compile source, bare: on
+        el = $('#repl_results')[0]
+        if el.innerText
+          el.innerText = window.compiledJS
+        else
+          $(el).text window.compiledJS
+        $('#error').hide()
+      catch error
+        $('#error').text(error.message).show()
+
+    # Listen for keypresses and recompile.
+    $('#repl_source').keyup -> compileSource()
+
+    # Eval the compiled js.
+    evalJS = ->
+      try
+        eval window.compiledJS
+      catch error then alert error
+
+    # Load the console with a string of CoffeeScript.
+    window.loadConsole = (coffee) ->
+      $('#repl_source').val coffee
+      compileSource()
+      $('.navigation.try').addClass('active')
+      false
+
+    # Helper to hide the menus.
+    closeMenus = ->
+      $('.navigation.active').removeClass 'active'
+
+    $('.minibutton.run').click evalJS
+
+    # Bind navigation buttons to open the menus.
+    $('.navigation').click (e) ->
+      return if e.target.tagName.toLowerCase() is 'a'
+      return false if $(e.target).closest('.repl_wrapper').length
+      if $(this).hasClass('active')
+        closeMenus()
+      else
+        closeMenus()
+        $(this).addClass 'active'
+      false
+
+    # Dismiss console if Escape pressed or click falls outside console
+    # Trigger Run button on Ctrl-Enter
+    $(document.body)
+      .keydown (e) ->
+        closeMenus() if e.which == 27
+        evalJS() if e.which == 13 and (e.metaKey or e.ctrlKey) and $('.minibutton.run:visible').length
+      .click (e) ->
+        return false if $(e.target).hasClass('minibutton')
+        closeMenus()
+
+    $('#open_webchat').click ->
+      $(this).replaceWith $('<iframe src="http://webchat.freenode.net/?channels=coffeescript" width="625" height="400"></iframe>')
+
+    compileSource()
+
+  </script>
+
+  <script src="coffeescript_demo_files/jquery-1.js"></script>
+  <script src="coffeescript_demo_files/coffee-script.js"></script>
+
+
+
+</body></html>
