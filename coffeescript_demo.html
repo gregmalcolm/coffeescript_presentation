@@ -51,16 +51,15 @@ samples was just a bonus! - Greg
   <div class="container scraps">
     <span class="bookmark" id="top"></span>
 
+    <h1>Slide notes</h1>
 
-
-
-
-
-
+Can't accidentally overwrite globals with var.
+Harder to accidentally overshadow a name when passing params.
+Variables declared in different files don't interact.
 
     <h1>Intro demo</h1>
     <div><pre>
-window.chooseWinner = ->
+@chooseWinner = ->
   attendees = [
     "Greg"
     "Guy"
@@ -79,7 +78,9 @@ window.chooseWinner = ->
   "#{attendees[winner_id]} wins a bag of full strength Sumatra coffee beans!"
     </pre></div>
     <div><pre>
-window.chooseWinner = ->
+#/usr/bin/env coffee
+
+@chooseWinner = ->
   attendees = [
     "Greg"
     "Guy"
@@ -106,7 +107,8 @@ window.chooseWinner = ->
       attendees[id]
 
   "#{winner()} wins a bag of full strength Sumatra coffee beans!"
-    
+
+console.log @chooseWinner()
     </pre><div>
     
     <h1>Functions</h1>

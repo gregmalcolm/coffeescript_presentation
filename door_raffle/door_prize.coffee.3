@@ -1,4 +1,6 @@
-window.chooseWinner = ->
+#!/usr/bin/env coffee
+
+@chooseWinner = ->
   attendees = [
     "Greg"
     "Guy"
@@ -25,3 +27,5 @@ window.chooseWinner = ->
       attendees[id]
 
   "#{winner()} wins a bag of full strength Sumatra coffee beans!" 
+
+console.log @chooseWinner()

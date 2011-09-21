@@ -1,4 +1,6 @@
-window.chooseWinner = ->
+#!/usr/bin/env coffee
+
+@chooseWinner = ->
   attendees = [
     "Greg"
     "Guy"
@@ -9,9 +11,22 @@ window.chooseWinner = ->
     "Isaac"
     "Chris"
     "Simon"
-    "Jeff"
+    "Faye"
+    "Steve"
+    "Kevin"
   ]
 
-  winner_id = Math.floor(Math.random() * attendees.length)
+  pickNumber = (max) ->
+    Math.floor(Math.random() * max)
 
-  "#{attendees[winner_id]} wins a bag of full strength Sumatra coffee beans!"  
+  winner = ->
+    id = pickNumber(attendees.length * 2)
+
+    person = if id > attendees.length
+      "Greg"
+    else
+      attendees[id]
+
+  "#{winner()} wins a bag of full strength Columbus coffee!"
+
+console.log @chooseWinner()
